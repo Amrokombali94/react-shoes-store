@@ -4,6 +4,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {clearCurrentUser} from "../store/actions/user";
 import {Role} from "../models/role";
+import {NavItem} from "react-bootstrap";
 
 
 
@@ -16,6 +17,8 @@ const NavBar = () =>{
 
     const navigate = useNavigate;
 
+
+
     const logout = () => {
         dispatch(clearCurrentUser());
         navigate('/login');
@@ -25,10 +28,14 @@ const NavBar = () =>{
     return (
 
         <nav className="navbar navbar-expand navbar-dark bg-success">
-            <a href="https://reactjs.org" className="navbar-brand ms-1">
+            {/*<a href="https://reactjs.org" className="navbar-brand ms-1">*/}
+            <NavLink to="/profile" className="nav-link">
                 <img src={logo1} className="App-logo" alt="logo" />
-                    Amro Shop
-            </a>
+            </NavLink>
+
+            <NavItem href="#"  style={{fontSize: 20, fontWeight: 'bold'}}> Amro Shop</NavItem>
+
+            {/*</a>*/}
 
             <div className="navbar-nav me-auto">
                 {currentUser?.role === Role.ADMIN &&

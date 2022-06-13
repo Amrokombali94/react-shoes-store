@@ -19,18 +19,22 @@ const RegisterPage = () =>{
 
     const navigate = useNavigate();
 
+
+
     useEffect(() =>{
         if(currentUser?.id){
 
-            // <Navigate To="/profile" />
+
 
             navigate('/profile');
+
+
 
         }
     }, [])
 
     const handleChange = (e) =>{
-        const {name, value} =e.target;
+        const {name, value} = e.target;
 
         setUser((prevState => {
             return{
@@ -55,6 +59,7 @@ const RegisterPage = () =>{
         AuthenticationService.register(user).then(_=> {
 
                 navigate('/login');
+                // history.push('/login');
             }).catch(error =>{
             console.log(error);
             if (error?.response?.status === 409){
@@ -79,7 +84,7 @@ const RegisterPage = () =>{
                 }
 
                 <form
-                    onSelect={(e) => handleRegister(e)}
+                    onSubmit={(e) => handleRegister(e)}
                     noValidate
                     className={submitted ? 'was-validated' : ''}
                 >
@@ -101,7 +106,7 @@ const RegisterPage = () =>{
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="password" >Password</label>
+                        <label htmlFor="password" >Password:</label>
                         <input
                             type="password"
                             name="password"

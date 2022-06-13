@@ -1,11 +1,12 @@
 import {useEffect, useState} from "react";
 import User from "../../models/user";
 import {useDispatch, useSelector} from "react-redux";
-import {Link, useNavigate, u} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import AuthenticationService from "../../services/authentication.service";
 import {setCurrentUser} from "../../store/actions/user";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUserCircle} from "@fortawesome/free-solid-svg-icons";
+
 
 const LoginPage = () =>{
 
@@ -22,12 +23,13 @@ const LoginPage = () =>{
 
     const navigate = useNavigate();
 
+
+
     const  dispatch = useDispatch();
 
     useEffect(() =>{
         if(currentUser?.id){
 
-            // <Navigate To="/profile" />
 
             navigate('/profile');
 
@@ -35,7 +37,7 @@ const LoginPage = () =>{
     }, [])
 
     const handleChange = (e) =>{
-        const {name, value} =e.target;
+        const {name, value} = e.target;
 
         setUser((prevState => {
             return{
@@ -50,7 +52,7 @@ const LoginPage = () =>{
 
         setSubmitted(true);
 
-        if(!user.username || user.password){
+        if(!user.username || !user.password){
             return;
         }
 
@@ -80,7 +82,7 @@ const LoginPage = () =>{
                 }
 
                 <form
-                    onSelect={(e) => handleLogin(e)}
+                    onSubmit = {(e) => handleLogin(e)}
                     noValidate
                     className={submitted ? 'was-validated' : ''}
                 >
